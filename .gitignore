@@ -17,6 +17,7 @@ oauth2_token.json
 # Ship .mcp.json.example instead.
 .mcp.json
 
-# Personal agent notes, kept local
+# Personal notes and setup guides, kept local
 AGENTS.md
 CLAUDE.md
+PI_SETUP.md
