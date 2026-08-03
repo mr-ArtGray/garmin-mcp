@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# Never commit credentials or Garmin session tokens
+.env
+tokens/
+*garmin_tokens*.json
+oauth1_token.json
+oauth2_token.json
+
+# Machine-specific: contains absolute paths (and therefore a username).
+# Ship .mcp.json.example instead.
+.mcp.json
+
+# Personal agent notes, kept local
+AGENTS.md
+CLAUDE.md

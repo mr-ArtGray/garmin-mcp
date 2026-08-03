@@ -1,0 +1,14 @@
+{
+  "_comment": "Copy to .mcp.json and set the absolute path to your checkout. .mcp.json is gitignored because the path is machine-specific.",
+  "mcpServers": {
+    "garmin": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/garmin-mcp",
+        "run",
+        "garmin-mcp"
+      ]
+    }
+  }
+}
