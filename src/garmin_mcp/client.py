@@ -111,10 +111,10 @@ class GarminSession:
         try:
             data = json.loads(candidate.read_text(encoding="utf-8"))
             logger.info(
-                "Garmin token diagnostics: access_token_present=%s, refresh_token_present=%s, oauth1_present=%s",
-                bool(data.get("di_access_token")),
+                "Garmin token diagnostics: access_token_present=%s, refresh_token_present=%s, client_id_present=%s",
+                bool(data.get("di_token")),
                 bool(data.get("di_refresh_token")),
-                bool(data.get("oauth1_token")),
+                bool(data.get("di_client_id")),
             )
         except Exception as exc:
             logger.warning("Garmin token metadata inspection failed: %s", type(exc).__name__)
