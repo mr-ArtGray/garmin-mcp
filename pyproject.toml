@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "mcp>=2,<3",
-    "garminconnect>=0.3.8",
+    "garminconnect==0.3.20",
 ]
 
 [project.scripts]

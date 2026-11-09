@@ -8,7 +8,7 @@ COPY pyproject.toml uv.lock ./
 COPY src ./src
 COPY README.md ./
 
-RUN uv sync --frozen --no-dev
+RUN uv sync --no-dev
 
 ENV GARMIN_MCP_TRANSPORT=streamable-http
 ENV GARMIN_MCP_HOST=0.0.0.0
