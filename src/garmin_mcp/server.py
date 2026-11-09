@@ -10,6 +10,7 @@ from __future__ import annotations
 import logging
 import secrets
 import sys
+import threading
 from typing import Annotated, Any
 
 import anyio
@@ -283,6 +284,7 @@ def main() -> None:
 
     session = GarminSession(settings)
     session.log_token_diagnostics()
+    threading.Thread(target=session.validate_token_on_startup, daemon=True).start()
     mcp = build_server(session)
 
     if settings.is_http:
