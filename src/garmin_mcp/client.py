@@ -99,6 +99,26 @@ class GarminSession:
 
         return TokenStore.OK if data.get("di_refresh_token") else TokenStore.MALFORMED
 
+    def log_token_diagnostics(self) -> None:
+        """Log only non-secret token metadata for deployment troubleshooting."""
+        store = Path(self._settings.token_store).expanduser()
+        candidate = store / "garmin_tokens.json" if store.is_dir() else store
+        status = self._token_store_status()
+        logger.info("Garmin token diagnostics: status=%s, store_is_dir=%s, file_exists=%s",
+                    status.name, store.is_dir(), candidate.is_file())
+        if status is not TokenStore.OK:
+            return
+        try:
+            data = json.loads(candidate.read_text(encoding="utf-8"))
+            logger.info(
+                "Garmin token diagnostics: access_token_present=%s, refresh_token_present=%s, oauth1_present=%s",
+                bool(data.get("di_access_token")),
+                bool(data.get("di_refresh_token")),
+                bool(data.get("oauth1_token")),
+            )
+        except Exception as exc:
+            logger.warning("Garmin token metadata inspection failed: %s", type(exc).__name__)
+
     def _auth_message(self, exc: Exception) -> str:
         resolved = Path(self._settings.token_store).expanduser()
         status = self._token_store_status()
