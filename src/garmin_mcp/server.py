@@ -282,6 +282,7 @@ def main() -> None:
     )
 
     session = GarminSession(settings)
+    session.log_token_diagnostics()
     mcp = build_server(session)
 
     if settings.is_http:
