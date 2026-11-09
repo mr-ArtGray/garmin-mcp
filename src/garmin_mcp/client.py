@@ -119,6 +119,21 @@ class GarminSession:
         except Exception as exc:
             logger.warning("Garmin token metadata inspection failed: %s", type(exc).__name__)
 
+    def validate_token_on_startup(self) -> None:
+        """Single safe server-side login probe; never log token contents."""
+        try:
+            client = Garmin()
+            client.login(self._settings.token_store)
+        except Exception as exc:
+            logger.warning(
+                "Garmin token validation: FAILED, error_type=%s",
+                type(exc).__name__,
+            )
+        else:
+            with self._lock:
+                self._client = client
+            logger.info("Garmin token validation: SUCCESS")
+
     def _auth_message(self, exc: Exception) -> str:
         resolved = Path(self._settings.token_store).expanduser()
         status = self._token_store_status()
